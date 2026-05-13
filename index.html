@@ -1,46 +1,121 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Image Target AR</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MindSprout AR</title>
+
+  <!-- A-Frame -->
   <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+
+  <!-- MindAR -->
   <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
+
+  <!-- STL Loader -->
+  <script src="https://unpkg.com/aframe-stl-model-component/dist/aframe-stl-model-component.min.js"></script>
 </head>
-<body style="margin:0;overflow:hidden">
+
+<body style="margin:0; overflow:hidden;">
+
   <a-scene
-    mindar-image="imageTargetSrc:./targets.mind"
+    mindar-image="imageTargetSrc: ./targets.mind;"
     color-space="sRGB"
-    renderer="colorManagement:true,physicallyCorrectLights"
-    vr-mode-ui="enabled:false"
-    device-orientation-permission-ui="enabled:false">
+    renderer="colorManagement: true; physicallyCorrectLights: true;"
+    vr-mode-ui="enabled: false"
+    device-orientation-permission-ui="enabled: false"
+    embedded>
 
-    <a-assets></a-assets>
+    <!-- Assets -->
+    <a-assets>
 
-    <a-camera position="0 0 0" look-controls="enabled:false"></a-camera>
+      <!-- 3D STL Model -->
+      <a-asset-item
+        id="logoModel"
+        src="./mindsprout_logo_3d.stl">
+      </a-asset-item>
 
-    <!-- This entity appears when image is detected -->
-    <a-entity mindar-image-target="targetIndex:0">
+    </a-assets>
 
-      <!-- Floating animated text over your target -->
+    <!-- Camera -->
+    <a-camera
+      position="0 0 0"
+      look-controls="enabled: false">
+    </a-camera>
+
+    <!-- Target -->
+    <a-entity mindar-image-target="targetIndex: 0">
+
+      <!-- Light -->
+      <a-light
+        type="ambient"
+        color="#ffffff"
+        intensity="1">
+      </a-light>
+
+      <a-light
+        type="directional"
+        position="1 2 1"
+        intensity="1.5">
+      </a-light>
+
+      <!-- 3D Model -->
+      <a-entity
+        stl-model="#logoModel"
+        position="0 0 0"
+        rotation="0 0 0"
+        scale="0.01 0.01 0.01"
+        material="
+          color:#00E5FF;
+          metalness:0.4;
+          roughness:0.3;
+        "
+        animation="
+          property: rotation;
+          to: 0 360 0;
+          loop: true;
+          dur: 6000;
+          easing: linear;
+        ">
+      </a-entity>
+
+      <!-- Floating Text -->
       <a-text
-        value="✨ AR Activated!"
-        position="0 0.2 0"
+        value="✨ MindSprout AR Activated!"
+        position="0 0.6 0"
         scale="0.5 0.5 0.5"
-        color="#00E5FF"
         align="center"
-        animation="property:position;to:0 0.5 0;dir:alternate;loop:true;dur:1500">
+        color="#00E5FF"
+        animation="
+          property: position;
+          to: 0 0.8 0;
+          dir: alternate;
+          loop: true;
+          dur: 1500;
+        ">
       </a-text>
 
-      <!-- Spinning torus ring around the target -->
+      <!-- Ring Effect -->
       <a-torus
         position="0 0 0"
-        radius="0.4"
-        radius-tubular="0.03"
-        material="color:#6C63FF;emissive:#6C63FF;opacity:0.7"
-        animation="property:rotation;to:0 360 0;loop:true;dur:2000">
+        radius="0.45"
+        radius-tubular="0.02"
+        material="
+          color:#6C63FF;
+          emissive:#6C63FF;
+          opacity:0.7;
+        "
+        animation="
+          property: rotation;
+          to: 0 360 0;
+          loop: true;
+          dur: 2500;
+          easing: linear;
+        ">
       </a-torus>
 
     </a-entity>
+
   </a-scene>
+
 </body>
 </html>
