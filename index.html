@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>MindSprout AR</title>
+  <title>Image Target AR</title>
   <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
 </head>
@@ -14,24 +14,16 @@
     vr-mode-ui="enabled:false"
     device-orientation-permission-ui="enabled:false">
 
-    <a-assets>
-      <a-asset-item id="myModel" src="./mindsprout_logo_3d.glb"></a-asset-item>
-    </a-assets>
+    <a-assets></a-assets>
 
     <a-camera position="0 0 0" look-controls="enabled:false"></a-camera>
 
+    <!-- This entity appears when image is detected -->
     <a-entity mindar-image-target="targetIndex:0">
-      
-      <a-gltf-model 
-        src="#myModel" 
-        position="0 0 0" 
-        rotation="0 0 0" 
-        scale="0.1 0.1 0.1"
-        animation="property: rotation; to: 0 360 0; loop: true; dur: 5000">
-      </a-gltf-model>
 
+      <!-- Floating animated text over your target -->
       <a-text
-        value="✨ AR Activated!"
+        value="MindSprout Technologies is live"
         position="0 0.2 0"
         scale="0.5 0.5 0.5"
         color="#00E5FF"
@@ -39,6 +31,7 @@
         animation="property:position;to:0 0.5 0;dir:alternate;loop:true;dur:1500">
       </a-text>
 
+      <!-- Spinning torus ring around the target -->
       <a-torus
         position="0 0 0"
         radius="0.4"
